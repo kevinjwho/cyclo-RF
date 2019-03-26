@@ -1,5 +1,11 @@
 %% LC Optimization
 
+%% TODO:
+% 1.) determine how to calculate Rac for each L, C pair
+% 2.) determine how to calculate Q value, and how this relates to
+% optimization problem
+% 3.) improve frequency color scheme
+
 %% reset
 clear; close all; clc
 
