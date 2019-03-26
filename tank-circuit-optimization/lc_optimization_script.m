@@ -10,10 +10,10 @@ d = 2; % diameter of inductor loop, in inches
 n_l = 1.125; % turns per unit length
 
 %% Variables
-L = [0.1:0.1:10]*10^-6; % choose discrete values for L, in H
-RAc = [50]*10^-3; % in Ohm -- somehow this relates to L
-C = (0:150)*10^-12; % in F -- actually (mostly) continuous for vacuum C
-P = [100:700:1500]; % in W -- can probably tune with hardware
+L = (0.1:0.1:10)*10^-6; % choose discrete values for L, in H
+RAc = (50)*10^-3; % in Ohm -- somehow this relates to L?
+C = (0:0.1:150)*10^-12; % in F -- actually (mostly) continuous for vacuum C
+P = (1500); % in W -- can probably tune with hardware
 
 %% Inductor things
 ll = zeros(2, length(L)); % vector for inductor length, in inches
@@ -25,8 +25,8 @@ for k = 1:length(L)
     ll(:,k) = roots([a b c]);
 end
 l = ll(1,:);
-figure(11), plot(1:length(ll), ll(1,:),'x', 1:length(ll), ll(2,:),'o')
-figure(12), plot(l)
+%figure(11), plot(1:length(ll), ll(1,:),'x', 1:length(ll), ll(2,:),'o')
+%figure(12), plot(l)
 
 %% Calculations
 C_eq = C+C_Dee; % calculate parallel capacitance
