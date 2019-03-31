@@ -31,6 +31,9 @@ for k = 1:length(L)
     ll(:,k) = roots([a b c]);
 end
 l = ll(1,:);
+d = 3;
+n_l = 2;
+roots([d^2*n_l^2 -40*1.2 -18*d*1.2])
 %figure(11), plot(1:length(ll), ll(1,:),'x', 1:length(ll), ll(2,:),'o')
 %figure(12), plot(l)
 
