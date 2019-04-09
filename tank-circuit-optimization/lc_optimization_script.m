@@ -10,7 +10,7 @@
 clear; close all; clc
 
 %% Constants
-C_Dee = 78*10^-12; % in Farads -- maybe want to remeasure
+C_Dee = 78.1*10^-12; % in Farads -- maybe want to remeasure
 min_freq = 6*10^6; max_freq = 16*10^6; % in Hz
 d = 2; % diameter of inductor loop, in inches
 n_l = 1.125; % turns per unit length
@@ -54,6 +54,11 @@ title('Frequency for given L,C pair');
 xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
 view(45,45);
 
+figure(102), surf(Cg,Lg,freq);
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
+
 
 % -------- Some notes:
 % RAc should change for each L - how to figure this out?
@@ -92,7 +97,7 @@ figure(1), grid; cbar=colorbar; ylabel(cbar,'frequency (MHz)'); hold off;
 
 %% If you've decided on an L value, take a slice of the 3D plot...
 myC_Dee = C_Dee; % in F
-myL = 1.2; % in uH
+myL = 1; % in uH
 myP = 1500; % in W
 myRAc = RAc; % in Ohm
 myL = myL * 10^-6; % in H, to be input
@@ -111,7 +116,7 @@ function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     Vrange = [Vmin Vmax];
     
     C_var = Cmin:(Cmax-Cmin)/1000:Cmax;
-    C_vec = C_var + C_Dee
+    C_vec = C_var + C_Dee;
     V_vec = 2*sqrt(2*P*L./(RAc*C_vec));
     F_vec = 1./(2*pi*sqrt(L*C_vec));
     
