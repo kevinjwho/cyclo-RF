@@ -6,30 +6,34 @@ Voltage_Readout = Experiment_Data(:,3);
 %% Plotting Initial Plots
 % Need to get rid of first couple datapoints since they are positive and
 % everything else is negative
-PhaseDifference_Oscilloscope = PhaseDifference_Oscilloscope(4:end)
-scatter(PhaseDifference_Oscilloscope,Voltage_Readout(4:end))
-title('Voltage Readout vs Measured Phase Difference')
-xlabel('Phase Difference (Degrees)')
-ylabel('Voltage Readout (Volts)')
+PhaseDifference_Oscilloscope = PhaseDifference_Oscilloscope(4:end);
+scatter(PhaseDifference_Oscilloscope,Voltage_Readout(4:end));
+title('Voltage Readout vs Measured Phase Difference');
+xlabel('Phase Difference (Degrees)');
+ylabel('Voltage Readout (Volts)');
 hold on
-
+%% skip poly
 p3 = polyfit(PhaseDifference_Oscilloscope, Voltage_Readout(4:end),3);
-poly1 = polyval(p3, PhaseDifference_Oscilloscope)
+poly1 = polyval(p3, PhaseDifference_Oscilloscope);
 plot(PhaseDifference_Oscilloscope, poly1)
 
 p5 = polyfit(PhaseDifference_Oscilloscope, Voltage_Readout(4:end),5);
-y5 = polyval(p5, PhaseDifference_Oscilloscope)
+y5 = polyval(p5, PhaseDifference_Oscilloscope);
 plot(PhaseDifference_Oscilloscope, y5)
-
+%% logistic and atan
 %L is the curve's maximum, which is 1.75 Volts 
 %x0 is the midpoint of the curve which is going to be 90 degrees
 % for the equation f(x) = L/(1+ e^(-k(x-x0))). We need to find k. Little
 % bit of guess and check makes 0.09 a good value for it.
-x = linspace(-180,0,1000)
-y = 2.75./(1+exp(0.09*(x+90))) -1 
+x = linspace(-180,0,1000);
+y = 2.75./(1+exp(0.09*(x+90))) -1;
 plot(x,y)
 
-legend('Data', '3rd Degree Polynomial Fit','5th Degree Polynomial Fit', 'Logistic Fit')
+atany = atan(-0.0704*(x+90.4285))+0.3;
+plot(x, atany);
+
+%legend('Data', '3rd Degree Polynomial Fit','5th Degree Polynomial Fit', 'Logistic Fit', 'Arctan Fit')
+legend('Data', 'Logistic Fit', 'Arctan Fit')
 
 hold off
 %% Making full plot 
