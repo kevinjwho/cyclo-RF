@@ -1,30 +1,57 @@
 %% pfag main
 
 %% setup, run ONCE
-addpath('PFAG','PFAG/util');
+addpath('PFAG','PFAG/util','scope');
 clc, clear
+ph_det_ch = 2;
 %instrreset; disp('reset'); % disconnect and close all instrument objects
 p = tuner_initialize_pfag; disp('pfag initialized');
+s = initialize_scope; disp('scope initialized');
 
-%% make arbitrary sine waveform
+%% make arbitrary sine waveform and take readings
 clc
-numpts = 47;
+numpts = 49;
 t = linspace(0,2*pi,numpts);
 p.data1 = sin(t);
-for theta = 0:5:360 % in degrees
-    p.data2 = sin(t+theta*pi/180); % convert to rad
-    %fprintf(p.deviceObj,':FUNC2:USER');
-    %fprintf(p.deviceObj,':FUNC2 USER');
+theta = 0:5:360; % in degrees
+Vout = zeros(size(theta));
+for k = 1:length(theta) % in degrees
+    p.data2 = sin(t+theta(k)*pi/180); % convert to rad
+    fprintf(p.deviceObj,':FUNC2:USER');
+    fprintf(p.deviceObj,':FUNC2 USER');
     str = [':DATA2 VOLATILE, ',pfag_arr2str(p.data2)];
-    %fprintf(p.deviceObj,str);
+    fprintf(p.deviceObj,str); % send data to ch2
+    
+    [s.yData2,s.xData2,s.yUnits2,s.xUnits2] = ... 
+        invoke(s.waveformObj2, 'readwaveform', s.channelObj2.name)
+    % read data from channel 2
+    Vout(k) = mean(s.yData2); % take mean and store
+    
+    
     figure(1), stem(t, p.data1); hold on,
     stem(t, p.data2); hold off;
     grid, legend('OUT1', 'OUT2');
-    title(['theta = ' num2str(theta)]), pause(1/10)
+    title(['theta = ' num2str(theta(k))]), pause(1/10)
 end
+figure(2), plot(theta, Vout); 
+xlabel('phase diff (deg)'); ylabel('voltage')
+title('voltage v phase diff');
 
+%%
+clc
+addpath('scope')
+s = initialize_scope; disp('scope init');
+
+%%
+close all
+[s.yData2,s.xData2,s.yUnits2,s.xUnits2] = invoke(s.waveformObj2, 'readwaveform', s.channelObj2.name)
+[s.yData4,s.xData4,s.yUnits4,s.xUnits4] = invoke(s.waveformObj4, 'readwaveform', s.channelObj4.name)
+figure(2), plot(s.xData2, s.yData2)
+mean(s.yData2)
+%figure(4), plot(s.xData4, s.yData4)
 %% to remove visa connections
 instrfindall
 delete(instrfindall)
-
+clear
+clc
 %setprop_pfag(p); disp('sent prop');
