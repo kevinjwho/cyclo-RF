@@ -1,7 +1,7 @@
 %% pfag main
 
 %% setup, run ONCE
-addpath('PFAG','PFAG/util','scope');
+addpath('PFAG','PFAG/util','scope','auto-tuner');
 clc, clear
 ph_det_ch = 2;
 %instrreset; disp('reset'); % disconnect and close all instrument objects
@@ -14,12 +14,12 @@ numpts = 49;
 t = linspace(0,2*pi,numpts);
 p.data1 = sin(t);
 theta = 0:5:360; % in degrees
-Vout = zeros(size(theta));
+Vout = zeros(size(theta)); % initialize Vout measured by oscilloscope
 for k = 1:length(theta) % in degrees
     p.data2 = sin(t+theta(k)*pi/180); % convert to rad
-    fprintf(p.deviceObj,':FUNC2:USER');
-    fprintf(p.deviceObj,':FUNC2 USER');
-    str = [':DATA2 VOLATILE, ',pfag_arr2str(p.data2)];
+    fprintf(p.deviceObj,':FUNC2:USER'); % declare function
+    fprintf(p.deviceObj,':FUNC2 USER'); % ouput function
+    str = [':DATA2 VOLATILE, ',pfag_arr2str(p.data2)]; % make data string
     fprintf(p.deviceObj,str); % send data to ch2
     
     [s.yData2,s.xData2,s.yUnits2,s.xUnits2] = ... 
@@ -36,6 +36,18 @@ end
 figure(2), plot(theta, Vout); 
 xlabel('phase diff (deg)'); ylabel('voltage')
 title('voltage v phase diff');
+
+%% determine level shift parameters
+% definitions
+Vref = 9; Voutfs = 5; Voutzs = 0; % in V
+R1 = 22000; Rf = 22000; % in Ohm
+
+% measurements
+Vinfs = max(Vout); Vinzs = min(Vout);
+
+% calculations
+[m, b, R2, Rg] = level_shift(Vinfs, Vinzs, Voutfs, Voutzs, Vref, R1, Rf);
+
 
 %%
 clc
