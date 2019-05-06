@@ -97,7 +97,7 @@ figure(1), grid; cbar=colorbar; ylabel(cbar,'frequency (MHz)'); hold off;
 
 %% If you've decided on an L value, take a slice of the 3D plot...
 myC_Dee = C_Dee; % in F
-myL = 1; % in uH
+myL = 1.2; % in uH
 myP = 1500; % in W
 myRAc = RAc; % in Ohm
 myL = myL * 10^-6; % in H, to be input
@@ -121,7 +121,9 @@ function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     F_vec = 1./(2*pi*sqrt(L*C_vec));
     
     figure(200); scatter(C_var * 10^12, V_vec, 1, F_vec*10^-6);
-    xlabel('C_{var} (pF)'), ylabel('Voltage'),
-    title(['Voltage and Frequency vs C_{var} @ L = ' num2str(L*10^6) 'uH']);
+    xlabel('C_{var} (pF)'), ylabel('V_{pp} (V)'),
+    title(['V_{pp} and Frequency vs C_{var} @ L = ' num2str(L*10^6) ...
+        'uH, Rs = ' num2str(RAc) 'm\Omega']);
+    ylim([0 max(V_vec)]);
     figure(200), grid; cb = colorbar; ylabel(cb, 'Frequency (MHz)');
 end

@@ -77,9 +77,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 D = str2double(get(handles.edit57, 'String')); % in in.
 n_l = str2double(get(handles.edit58, 'String')); % in turns/1in.
@@ -126,9 +127,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 % --- Executes during object creation, after setting all properties.
 function edit19_CreateFcn(hObject, eventdata, handles)
@@ -170,9 +172,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 D = str2double(get(handles.edit57, 'String')); % in in.
 n_l = str2double(get(handles.edit58, 'String')); % in turns/1in.
@@ -221,9 +224,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 % --- Executes during object creation, after setting all properties.
 function edit21_CreateFcn(hObject, eventdata, handles)
@@ -265,9 +269,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 % --- Executes during object creation, after setting all properties.
 function edit22_CreateFcn(hObject, eventdata, handles)
@@ -359,9 +364,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 % --- Executes during object creation, after setting all properties.
 function edit55_CreateFcn(hObject, eventdata, handles)
@@ -403,9 +409,10 @@ C_vec = (C_min:((C_max-C_min)/10000):C_max)*10^-12;
 V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 % --- Executes during object creation, after setting all properties.
 function edit56_CreateFcn(hObject, eventdata, handles)
@@ -446,9 +453,10 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); 
 grid;
-title(['Voltage and Freq. vs C for L = ' num2str(L*10^6) 'uH']);
-xlabel('C_{var} (pF)'), ylabel('Voltage (V)');
-cb = colorbar; ylabel(cb, 'freq (MHz');
+title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
+    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
+cb = colorbar; ylabel(cb, 'freq (MHz)');
 
 D = str2double(get(handles.edit57, 'String')); % in in.
 n_l = str2double(get(handles.edit58, 'String')); % in turns/1in.
