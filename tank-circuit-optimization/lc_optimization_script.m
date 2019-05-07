@@ -62,8 +62,8 @@ for n = 1:length(P)
         % parameter 4 specifies point size
         % parameter 5 specifies color map (change color for different Vpp
         % values).
-    title('Voltage level for given L,C pair @ various P')
-    xlabel('Capacitance (pF)'), ylabel('Inductance (uH)'),zlabel('Voltage');
+    title('V_{pp} and Frequency for given L,C pair @ various P')
+    xlabel('Capacitance (pF)'), ylabel('Inductance (uH)'),zlabel('V_{pp} (V)');
     view(45,45); 
     
     % -- just for scatter3 vs surface comparison
@@ -77,7 +77,7 @@ for n = 1:length(P)
     %}
     
 end
-figure(1), grid; cbar=colorbar; ylabel(cbar,'frequency (MHz)'); hold off;
+figure(1), grid on; cbar=colorbar; ylabel(cbar,'frequency (MHz)'); hold off;
 
 %% If you've decided on an L value, take a slice of the 3D plot...
 myC_Dee = C_Dee; % in F
@@ -90,6 +90,24 @@ myL = myL * 10^-6; % in H, to be input
 myC = myC * 10^12
 myV
 
+
+%% other plots
+figure(100), scatter3(Cg(ind==1),Lg(ind==1),freq(ind==1));
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
+
+figure(101), mesh(Cg,Lg,freq.*ind);
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
+
+figure(102), surf(Cg,Lg,freq);
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
+
+%% function getInfo
 function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     Cmax = 1/(L*(2*pi*Fmin)^2) - C_Dee;
     Cmin = 1/(L*(2*pi*Fmax)^2) - C_Dee;
@@ -107,23 +125,7 @@ function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     figure(200); scatter(C_var * 10^12, V_vec, 1, F_vec*10^-6);
     xlabel('C_{var} (pF)'), ylabel('V_{pp} (V)'),
     title(['V_{pp} and Frequency vs C_{var} @ L = ' num2str(L*10^6) ...
-        'uH, Rs = ' num2str(RAc) 'm\Omega']);
+        'uH, Rs = ' num2str(RAc*10^3) 'm\Omega']);
     ylim([0 max(V_vec)]);
     figure(200), grid; cb = colorbar; ylabel(cb, 'Frequency (MHz)');
 end
-
-%% other plots
-figure(100), scatter3(Cg(ind==1),Lg(ind==1),freq(ind==1));
-title('Frequency for given L,C pair');
-xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
-view(45,45);
-
-figure(101), mesh(Cg,Lg,freq.*ind);
-title('Frequency for given L,C pair');
-xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
-view(45,45);
-
-figure(102), surf(Cg,Lg,freq);
-title('Frequency for given L,C pair');
-xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
-view(45,45);

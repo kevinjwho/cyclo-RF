@@ -78,7 +78,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -128,7 +128,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -173,7 +173,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -225,7 +225,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -270,7 +270,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -365,7 +365,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -410,7 +410,7 @@ V_vec = 2*sqrt(2*P*L./(Rs.*(C_vec+C_Dee)));
 freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee))); 
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
@@ -454,7 +454,7 @@ freq_vec = 1./(2*pi*sqrt(L*(C_vec+C_Dee)));
 axes(handles.axes1); scatter(C_vec*10^12, V_vec, 1, freq_vec*10^-6); 
 grid;
 title(['V_{pp} and Freq. vs C_{var} for L = ' num2str(L*10^6) ... 
-    'uH, Rs = ' num2str(Rs) 'm\Omega']);
+    'uH, Rs = ' num2str(Rs*10^3) 'm\Omega']);
 xlabel('C_{var} (pF)'), ylabel('Voltage (V)'); ylim([0 max(V_vec)]);
 cb = colorbar; ylabel(cb, 'freq (MHz)');
 
