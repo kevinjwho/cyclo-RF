@@ -44,22 +44,6 @@ C_eq = C+C_Dee; % calculate parallel capacitance
 freq = 1./(2*pi*sqrt(Lg.*Cg)); % define freq array as freq(L,C) for each (L,C) pair
 ind = (freq >= min_freq) & (freq <= max_freq); % create logical array to see which indices (l,c) puts us within our range
 
-figure(100), scatter3(Cg(ind==1),Lg(ind==1),freq(ind==1));
-title('Frequency for given L,C pair');
-xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
-view(45,45);
-
-figure(101), mesh(Cg,Lg,freq.*ind);
-title('Frequency for given L,C pair');
-xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
-view(45,45);
-
-figure(102), surf(Cg,Lg,freq);
-title('Frequency for given L,C pair');
-xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
-view(45,45);
-
-
 % -------- Some notes:
 % RAc should change for each L - how to figure this out?
 % we assumed P was set at 1500 - 
@@ -127,3 +111,19 @@ function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     ylim([0 max(V_vec)]);
     figure(200), grid; cb = colorbar; ylabel(cb, 'Frequency (MHz)');
 end
+
+%% other plots
+figure(100), scatter3(Cg(ind==1),Lg(ind==1),freq(ind==1));
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
+
+figure(101), mesh(Cg,Lg,freq.*ind);
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
+
+figure(102), surf(Cg,Lg,freq);
+title('Frequency for given L,C pair');
+xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
+view(45,45);
