@@ -4,8 +4,8 @@
 Vref = 9; % voltage level of stable reference
 Voutfs = 5; % full-scale output voltage
 Voutzs = 0; % zero-scale output voltage
-Vinfs = 1.1; % full-scale input ovltage
-Vinzs = -1.1; % zero-scale input voltage
+Vinfs = .1; % full-scale input voltage
+Vinzs = -.1; % zero-scale input voltage
 
 %% 2. Determining the type of function - solving for m and b
 m = (Voutfs - Voutzs)/(Vinfs - Vinzs)
