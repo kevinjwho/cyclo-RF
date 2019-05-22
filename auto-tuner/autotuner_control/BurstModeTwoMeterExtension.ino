@@ -46,7 +46,13 @@ void loop() {
   else
     autoTune();
 }
-void autoune(){
+void autoTune(){
+  lastSensorValue = sensorValue;
+  sensorValue = analogRead(analogInPin);
+  if(abs(lastSensorValue - sensorValue) > 100){
+        Outliers = true;
+        return 0;
+   }
    autoState = analogRead(switchSTATE); // Read state of the system from the state switch
   Serial.println(autoState);
   if (autoState > 700) { // If the input from the state switch is 5 V, run auto-tuner
