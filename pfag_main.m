@@ -1,9 +1,12 @@
 %% pfag main
 
+%% to remove visa connections
+%instrfindall
+delete(instrfindall), clear, clc
 %% setup, run ONCE
 addpath('PFAG','PFAG/util','scope','auto-tuner');
 clc, clear
-%instrreset; disp('reset'); % disconnect and close all instrument objects
+
 p = tuner_initialize_pfag; disp('pfag initialized');
 s = initialize_scope; disp('scope initialized');
 %arduinoObject = arduino('COM3','Uno')
@@ -22,10 +25,11 @@ theta = 0:5:360; % in degrees
 Vout = zeros(size(theta)); % initialize Vout measured by oscilloscope
 figure(1); sgtitle('calibration output figures');
 pause(0.00001); jFrame = get(handle(gcf), 'JavaFrame'); jFrame.setMaximized(1);
+pause(2);
 for k = 1:length(theta) % in degrees
     p.data2 = sin(t+theta(k)*pi/180); % convert to rad
-    fprintf(p.deviceObj,':FUNC2:USER'); % declare function
-    fprintf(p.deviceObj,':FUNC2 USER'); % ouput function
+    fprintf(p.deviceObj,':FUNC2:USER'); % declare function for ch.2
+    fprintf(p.deviceObj,':FUNC2 USER'); % ouput function to ch.2
     str = [':DATA2 VOLATILE, ',pfag_arr2str(p.data2)]; % make data string
     fprintf(p.deviceObj,str); % send data to ch2
 
@@ -66,14 +70,14 @@ R2, Rg
 
 % -- graph level shifted curve 
 Vshift = m*Vout + b;
-subplot(2,2,3), stem(theta, Vshift); grid on;
+subplot(2,2,3), plot(theta, Vshift,'-o'); grid on;
 axis([min(theta) max(theta) 0 5]);
 xlabel('phase diff (deg)'); ylabel('voltage');
 title('shifted voltage (0-5) v nominal phase diff');
 
 % -- graph corresponding voltages that arduino should read
 Varduino = Vshift * 1023/5;
-figure(1), subplot(2,2,4), stem(theta, Varduino); grid on;
+figure(1), subplot(2,2,4), plot(theta, Varduino,'-o'); grid on;
 axis([min(theta) max(theta) 0 1023]);
 xlabel('phase diff (deg)'); ylabel('voltage');
 title('arduino shifted voltage (0-1023) v nominal phase diff');
@@ -83,10 +87,6 @@ title('arduino shifted voltage (0-1023) v nominal phase diff');
 %axis([min(theta) max(theta) 0 5]);
 %xlabel('phase diff (deg)'); ylabel('voltage');
 %title('arduino actual voltage v phase diff');
-
-%% to remove visa connections
-%instrfindall
-delete(instrfindall), clear, clc
 
 %% invoke example
 close all
