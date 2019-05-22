@@ -21,22 +21,6 @@ RAc = (800)*10^-3; % in Ohm -- somehow this relates to L?
 C = (0:0.1:550)*10^-12; % in F -- actually (mostly) continuous for vacuum C
 P = (1500); % in W -- can probably tune with hardware
 
-%% Inductor things
-ll = zeros(2, length(L)); % vector for inductor length, in inches
-a = d^2*n_l^2; 
-for k = 1:length(L)
-    b = -40*L(k)*10^6;
-    c = -18*d*L(k)*10^6;
-    % r = roots([a b c]);
-    ll(:,k) = roots([a b c]);
-end
-l = ll(1,:);
-d = 3;
-n_l = 2;
-roots([d^2*n_l^2 -40*1.2 -18*d*1.2])
-%figure(11), plot(1:length(ll), ll(1,:),'x', 1:length(ll), ll(2,:),'o')
-%figure(12), plot(l)
-
 %% Calculations
 C_eq = C+C_Dee; % calculate parallel capacitance
 [Cg, Lg] = meshgrid(C_eq, L); % define meshgrid to compute something as a function of (L,C) ordered pair
@@ -62,7 +46,7 @@ for n = 1:length(P)
         % parameter 4 specifies point size
         % parameter 5 specifies color map (change color for different Vpp
         % values).
-    title('V_{pp} and Frequency for given L,C pair @ various P')
+    title('V_{pp} and Frequency for given L,C pair')
     xlabel('Capacitance (pF)'), ylabel('Inductance (uH)'),zlabel('V_{pp} (V)');
     view(45,45); 
     
@@ -78,6 +62,17 @@ for n = 1:length(P)
     
 end
 figure(1), grid on; cbar=colorbar; ylabel(cbar,'frequency (MHz)'); hold off;
+
+figure(2), grid on; scatter3(Cg(Vpp>0)*10^12,Lg(Vpp>0)*10^6,...
+    freq(Vpp>0),1,freq(Vpp>0)*10^-6); % use scatter plot to show data
+% uses conditionals to plot only the data within our freq. range
+% parameter 4 specifies point size
+% parameter 5 specifies color map (change color for different Vpp
+% values).
+title('Frequency given L,C pair')
+    xlabel('Capacitance (pF)'), ylabel('Inductance (uH)'),zlabel('V_{pp} (V)');
+view(90, 90)
+figure(2), cbar2=colorbar; ylabel(cbar2,'frequency (MHz)'); hold off;
 
 %% If you've decided on an L value, take a slice of the 3D plot...
 myC_Dee = C_Dee; % in F
@@ -107,6 +102,24 @@ title('Frequency for given L,C pair');
 xlabel('Capactance'),ylabel('Inductance'),zlabel('Frequency');
 view(45,45);
 
+%% Inductor things
+ll = zeros(2, length(L)); % vector for inductor length, in inches
+a = d^2*n_l^2; 
+for k = 1:length(L)
+    b = -40*L(k)*10^6;
+    c = -18*d*L(k)*10^6;
+    % r = roots([a b c]);
+    ll(:,k) = roots([a b c]);
+end
+l = ll(1,:);
+d = 3;
+n_l = 2;
+roots([d^2*n_l^2 -40*1.2 -18*d*1.2])
+%figure(11), plot(1:length(ll), ll(1,:),'x', 1:length(ll), ll(2,:),'o')
+%figure(12), plot(l)
+
+
+
 %% function getInfo
 function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     Cmax = 1/(L*(2*pi*Fmin)^2) - C_Dee;
@@ -127,5 +140,5 @@ function [Crange, Vrange] = getInfo(C_Dee, L, P, RAc, Fmin, Fmax)
     title(['V_{pp} and Frequency vs C_{var} @ L = ' num2str(L*10^6) ...
         'uH, Rs = ' num2str(RAc*10^3) 'm\Omega']);
     ylim([0 max(V_vec)]);
-    figure(200), grid; cb = colorbar; ylabel(cb, 'Frequency (MHz)');
+    figure(200), grid on; cb = colorbar; ylabel(cb, 'Frequency (MHz)');
 end
